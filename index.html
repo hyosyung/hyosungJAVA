@@ -4,18 +4,25 @@
 <head>
     <title>효셩이의 자바스크립트</title>
     <link rel="stylesheet" href="index.css">
+    <!-- index.css 추가 -->
 </head>
 
 <body>
     <div class="js-clock">
         <h1 class="js-title" id="ttl">00:00</h1>
     </div>
-    <form class="js-form">
+    <form class="js-form form">
         <!-- what is your name? 이라고 이름을 묻는 form을 생성 -->
+        <!-- js-form 클래스와 form 클래스 모두 해당됨 -->
         <input type="text" placeholder="What is your name?" />
         <!-- 입력방식은 text -->
     </form>
+    <h4 class="js-greetings greeting"></h4>
+    <!-- 마찬가지로 클래스 리스트에 두개의 클래스 포함 -->
     <script src="clock.js"></script>
+    <!-- clock.js 추가 -->
+    <script src="greeting.js"></script>
+    <!-- gretting 추가 -->
 </body>
 
 </html>

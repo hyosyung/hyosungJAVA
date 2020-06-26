@@ -2,8 +2,21 @@ body {
     background-color: black;
 }
 
+.form,
+.greeting {
+    display: none;
+}
+
+.showing {
+    display: block;
+}
+
 #ttl {
     color: white;
     text-align: center;
     font-size: 60px;
+}
+
+h4 {
+    color: white;
 }
