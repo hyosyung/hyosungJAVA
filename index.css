@@ -1,0 +1,9 @@
+body {
+    background-color: black;
+}
+
+#ttl {
+    color: white;
+    text-align: center;
+    font-size: 60px;
+}
