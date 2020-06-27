@@ -4,7 +4,27 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 
 const TODOS_LS = 'toDos';
 
-const toDos = []; //paintToDo에서 쓸 배열
+let toDos = []; //paintToDo에서 쓸 배열
+
+
+function deleteToDo(event) {
+    //console.dir(event.target)을 해서 필요한 정보를 알 수 있음! event.target를 해야함. event는 이벤트 자체가 출력되기 때문
+    //event.target은 이벤트가 일어난 대상임!
+    //id에 접근하려면 event.target.parentNode를 보면 됨을 알 수 있음!
+    //console.log(event.target.parentNode); //콘솔창에 누른 리스트의 아이디가 출력됨을 알 수 있음
+
+    //delete child element mdn을 구글에 검색해보면 Node.removeChile() 라는 함수가 있음을 알 수 있음
+    const btn = event.target; //지역 변수이기 때문에 이름이 중복되도 상관 없음
+    const li = btn.parentNode;
+    toDoList.removeChild(li);
+    const cleanToDos = toDos.filter(function(toDo) {
+        return toDo.id !== parseInt(li.id); //li.id는 string임! parseInt(인자) : 스트링을 int로 바꾸어 반환!
+    });
+    //filter함수는 foreach처럼 array의 모든 아이템을 통해 함수를 실행함! 그리고 trued인 아이템들만 가지고 새로운 array를 만듬
+    //filter함수의 사용법도 알아두기! foreach와 아주 비슷함!!
+    toDos = cleanToDos; //필터링된 배열을 다시 toDos에 저장!
+    saveToDos(); //저장
+}
 
 function saveToDos() {
     localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
@@ -20,6 +40,7 @@ function paintToDo(text) {
     const newID = toDos.length + 1;
 
     delBtn.innerText = "❌";
+    delBtn.addEventListener("click", deleteToDo);
     span.innerText = text;
     li.appendChild(span);
     li.appendChild(delBtn);
