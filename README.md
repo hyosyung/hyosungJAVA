@@ -20,5 +20,5 @@
 
 ## 아래 주소로 들어가면 볼 수 있습니다.
 ```
-[https://hyosyung.github.io/hyosungJAVA/](https://hyosyung.github.io/hyosungJAVA/)
+https://hyosyung.github.io/hyosungJAVA/
 ```
