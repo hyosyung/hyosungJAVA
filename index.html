@@ -2,30 +2,41 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="김효셩" />
     <title>효셩이의 자바스크립트</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css\style.css">
     <!-- index.css 추가 -->
 </head>
 
 <body>
-    <div class="js-clock">
-        <h1 class="js-title" id="ttl">00:00</h1>
-    </div>
-    <form class="js-form form">
-        <!-- what is your name? 이라고 이름을 묻는 form을 생성 -->
-        <!-- js-form 클래스와 form 클래스 모두 해당됨 -->
-        <input type="text" placeholder="What is your name?" />
-        <!-- 입력방식은 text -->
-    </form>
-    <h4 class="js-greetings greeting"></h4>
-    <form class="js-toDoForm">
-        <input type="text" placeholder="할 일을 작성하세요" />
-        <!-- text를 입력할 수 있음 입력 form, 안에는 '할 일을 작성하세요' 라고 적혀있음 -->
-    </form>
-    <ul class="js-toDoList">
-    </ul>
+    <section class="center">
+        <div class="js-clock">
+            <h1 class="js-title" id="ttl">00:00</h1>
+        </div>
+        <form class="js-form form">
+            <!-- what is your name? 이라고 이름을 묻는 form을 생성 -->
+            <!-- js-form 클래스와 form 클래스 모두 해당됨 -->
+            <input type="text" placeholder="이름을 입력하세요." />
+            <!-- 입력방식은 text -->
+        </form>
+        <div class="js-greetings greeting"></div>
 
-    <span class="js-weather"></span>
+        <div>
+            <form class="js-toDoForm">
+                <input type="text" placeholder="할 일을 작성하세요." />
+                <!-- text를 입력할 수 있음 입력 form, 안에는 '할 일을 작성하세요' 라고 적혀있음 -->
+            </form>
+            <ul class="js-toDoList">
+            </ul>
+        </div>
+    </section>
+
+    <div class="js-weather weather">
+        <span class="weather__text"></span>
+    </div>
 
     <!-- 마찬가지로 클래스 리스트에 두개의 클래스 포함 -->
     <script src="clock.js"></script>

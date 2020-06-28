@@ -15,14 +15,14 @@ const form = document.querySelector(".js-form"), //js-form이라는 클래스를
 const USER_LS = "currentUser",
     SHOWING_className = "showing";
 
-function saveName(text) { //제일 마지막에 만든 함수
-    localStorage.setItem(USER_LS, text);
-    //로컬 저장소에 key값은 USER_LS으로, value값은 text으로 저장
-    //저장되어 있지 않은 상태라면
-    //loadName함수 호출->askForName함수 호출->입력 폼을 보이게 한 뒤
-    //submit 이벤트가 발생하면 handleSubmit 함수 호출 -> 입력의 Default 이벤트를 막은 뒤
-    //input으로 입력된 value값을 받아와서 paintGreeting실행(Hello value가 보이게함)->이름 저장
-}
+// function saveName(text) { //제일 마지막에 만든 함수
+//     localStorage.setItem(USER_LS, text);
+//     //로컬 저장소에 key값은 USER_LS으로, value값은 text으로 저장
+//     //저장되어 있지 않은 상태라면
+//     //loadName함수 호출->askForName함수 호출->입력 폼을 보이게 한 뒤
+//     //submit 이벤트가 발생하면 handleSubmit 함수 호출 -> 입력의 Default 이벤트를 막은 뒤
+//     //input으로 입력된 value값을 받아와서 paintGreeting실행(Hello value가 보이게함)->이름 저장
+// } //굳이 함수로 만들 필요 없을 것 같아서 그냥 다른데 넣어둠
 
 function handleSubmit(event) {
     event.preventDefault();
@@ -30,8 +30,8 @@ function handleSubmit(event) {
     //form의 Default가 실행되지 않도록 함
     //default는 입력값이 사라지는 것임
     const currentValue = input.value;
+    localStorage.setItem(USER_LS, currentValue);
     paintGreeting(currentValue);
-    saveName(currentValue);
 }
 
 function askForName() {
@@ -43,7 +43,7 @@ function paintGreeting(text) { //argument의 이름이 text임
     form.classList.remove(SHOWING_className);
     greeting.classList.add(SHOWING_className);
     //입력 form은 지우고, 인삿말을 출력하기
-    greeting.innerText = `Hello ${text}`;
+    greeting.innerText = `안녕하세요 ${text}님!`;
     //greeting 태그안의 text를 바꿈 -> 'Hello + text' 로
 }
 

@@ -2,7 +2,7 @@ const COORDS = 'coords';
 const API_KEY = "e98e4e6792510cf2d0c8177488acf7c6"; //날짜를 가져오기 위한 API_KEY 
 //api는 다른 서버에서 데이터를 편리하게 가져오기 위한 수단, api를 제공하는 웹사이트들이 있다.
 //openweathermap.org 에서 가져온 키임!
-const weather = document.querySelector('.js-weather');
+const weather = document.querySelector('.js-weather .weather__text');
 
 function getWeather(lat, lng) { //fetch와 then의 사용법!! 꼭 익혀두기!!
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric` //fetch는 해당 주소에서 데이터를 가져오는 함수이다.
@@ -12,7 +12,7 @@ function getWeather(lat, lng) { //fetch와 then의 사용법!! 꼭 익혀두기!
     }).then(function(json) {
         const temperature = json.main.temp;
         const place = json.name;
-        weather.innerText = `${temperature} @ ${place}`
+        weather.innerText = `${Math.floor(temperature)}ºC, 장소 : ${place}`
     })
 
 }

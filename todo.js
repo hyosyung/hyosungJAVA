@@ -40,10 +40,13 @@ function paintToDo(text) {
     const newID = toDos.length + 1;
 
     delBtn.innerText = "❌";
+    delBtn.className = "toDo__button";
     delBtn.addEventListener("click", deleteToDo);
     span.innerText = text;
-    li.appendChild(span);
+
     li.appendChild(delBtn);
+    li.appendChild(span);
+
     li.id = newID; //li에도 id값을 준다. -> 삭제할 때 어떤 아이디를 삭제할 지를 알기 위함!
     //appendChile함수의 기능 -> 인자를 그것의 father element 안에 넣는다.form
     toDoList.appendChild(li);
