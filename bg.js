@@ -1,29 +1,67 @@
  const body = document.querySelector("body");
+ const UNSPLASH_API_KEY = "P04CKuwE9jmy2Zbduz4_Ki6dckyiqyVgRORzDSKDxi4";
+ const UNSPLASH_URL = `https://api.unsplash.com/photos/random?client_id=${UNSPLASH_API_KEY}&query=landscape&orientation=landscape`;
 
- const IMG_NUMBER = 6; //내가 추가한 이미지는 6개임!
 
- function handleImgLoad() {
-     console.log("finished load");
+ const locationContainer = document.querySelector(".js-location span");
+
+
+
+
+ function saveBackground(imageUrl, city, country, name) {
+     const savedImage = localStorage.getItem("bg");
+     if (savedImage !== null) {
+         localStorage.removeItem("bg");
+     }
+     const expirationDate = new Date();
+     expirationDate.setDate(expirationDate.getDate() + 1);
+     const imageObject = {
+         url: imageUrl,
+         expiresOn: expirationDate,
+         city,
+         country,
+         name
+     }
+     localStorage.setItem("bg", JSON.stringify(imageObject));
+     loadBackground();
  }
 
- function paintImage(imgNumber) {
-     const image = new Image();
-     image.src = `photo/${imgNumber+1}.jpg`;
-     image.classList.add("bgImage");
-     body.prepend(image);
+ function loadBackground() {
+     const savedImage = localStorage.getItem("bg");
+     if (savedImage === null)
+         getBackground();
+     else {
+         const parsedImage = JSON.parse(savedImage);
+         const today = new Date();
+         if (today > parsedImage.expiresOn) {
+             getBackground();
+         } else {
+             body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)), url(${parsedImage.url})`;
+             locationContainer.innerHTML = `${parsedImage.name},${parsedImage.city},${parsedImage.country}`;
+         }
+     }
  }
 
- function genRandom() {
-     const number = Math.floor(Math.random() * 6);
-     //Math.random() 은 0에서 1사이의 무작위 수를 만들어줌
-     //Math.ceil()은 정수자리까지 올림
-     //Math.floor()은 정수자리까지 내림
-     return number;
+ function getBackground() { //fetch함수를 사용하여 API에서 정보를 가져오기!
+     fetch(UNSPLASH_URL)
+         .then(response => response.json())
+         .then(json => {
+             const image = json;
+             if (image.urls && image.urls.full && image.location) {
+                 const fullUrl = image.urls.full;
+                 const location = image.location;
+                 const city = location.city;
+                 const country = location.country;
+                 const name = location.name;
+                 saveBackground(fullUrl, city, country, name);
+             } else {
+                 getBackground();
+             }
+         });
  }
 
  function init() {
-     const randomNumber = genRandom();
-     paintImage(randomNumber);
+     loadBackground();
  }
 
  init();
